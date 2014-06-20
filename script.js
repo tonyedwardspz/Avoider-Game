@@ -35,12 +35,6 @@ function handleMouseMovement(mouseEvent) {
     avatarX = mouseEvent.offsetX;
     avatarY = mouseEvent.offsetY;
     
-    //avatar is 30px wide and the enemy is at x=250, so I have to check whether 
-	//mouseEvent.offsetX is within 30px either side of x=250 (i.e., from 220 to 280)
-    
-	//avatar is 33px tall, I have to check whether mouseEvent.offsetX 
-	//is within 33px ABOVE y=150 but since enemy is only 30px tall, I also check whether 
-	//mouseEvent.offsetX is within 30px BELOW y=150 therefore, I check from (117 to 180)
 }
 
 function handleTick (){
@@ -56,6 +50,7 @@ function handleTick (){
         gameCanvas.getContext('2d').drawImage(enemyImage, enemyXPositions[i], enemyYPositions[i]);
     }
      
+    // collision detection
     for(i = 0; i <= enemyXPositions.length; i++){
         if ((avatarX < enemyXPositions[i] && enemyXPositions[i] < avatarX + 30) || (enemyXPositions[i] < avatarX && avatarX < enemyXPositions[i] + 30)) {
             if ((avatarY < enemyYPositions[i] && enemyYPositions[i] < avatarY + 33) || (enemyYPositions[i] < avatarY && avatarY < enemyYPositions[i] + 30)){
