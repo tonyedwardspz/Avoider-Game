@@ -24,10 +24,10 @@ function init() {
     gameCanvas = document.getElementById('gameCanvas');
     
     // check for high score in local storage
-    if (localStorage.getItem('bestScore') >= 1){
+    if (localStorage.getItem('bestScore')){
         mostTicksSurvived = localStorage.getItem('bestScore');
+        updateScore();
     }
-    updateScore();
 }
 document.addEventListener('DOMContentLoaded', init);
 
@@ -66,7 +66,7 @@ function handleTick (){
     
     // generate a new enemy
     if (Math.random() < 1/20){
-        enemyYPositions.push(-40);
+        enemyYPositions.push(-60);
         enemyXPositions.push(Math.random() * 500);
     }
     
@@ -87,22 +87,21 @@ function updateScore(){
     gameCanvas.getContext('2d').font = '18px Impact';
     gameCanvas.getContext('2d').textBaseline = 'top';
     gameCanvas.getContext('2d').fillText('Score: ' + ticksSurvived, 3, 0);
-    gameCanvas.getContext('2d').fillText('Best Score: ' + mostTicksSurvived, 3 ,20)
+    gameCanvas.getContext('2d').fillText('Best Score: ' + mostTicksSurvived, 3 ,20);
     
-    
-    // welcome message
+    // display instructions if theres no score
     if(ticksSurvived === 0){
-        gameCanvas.getContext('2d').fillText('Click to start', 200 ,190)
+        gameCanvas.getContext('2d').fillText('Click to start', 200 ,190);
     }
 }
 
 
 function newHighScore(){
-    alert('new high score! ' + ticksSurvived + ' ticks survived.')
+    alert('new high score! ' + ticksSurvived + ' ticks survived.');
     mostTicksSurvived = ticksSurvived;
 
     // store new high score in local storage
-    localStorage.setItem('bestScore', mostTicksSurvived)
+    localStorage.setItem('bestScore', mostTicksSurvived);
     
     startNewGame();
 }
@@ -127,3 +126,4 @@ function checkColision(){
 }
 
 // -Game speeds up on second click
+//
