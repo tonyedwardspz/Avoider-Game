@@ -22,6 +22,11 @@ var mostTicksSurvived = 0;
 // update the canvas variable on load
 function init() {
     gameCanvas = document.getElementById('gameCanvas');
+    
+    // check for high score in local storage
+    if (localStorage.getItem('bestScore') >= 1){
+        mostTicksSurvived = localStorage.getItem('bestScore');
+    }
     updateScore();
 }
 document.addEventListener('DOMContentLoaded', init);
@@ -30,12 +35,6 @@ document.addEventListener('DOMContentLoaded', init);
 // called on canvas click event
 function setUpGame() {
     
-    // check for high score in local storage
-    if (localStorage.getItem('bestScrore')){
-        mostTicksSurvived = localStorage.getItem('bestScrore');
-        updateScore();
-    }
-
     gameCanvas.addEventListener("mousemove", handleMouseMovement);
     setInterval(handleTick, 25);
 }
@@ -90,8 +89,10 @@ function updateScore(){
     gameCanvas.getContext('2d').fillText('Score: ' + ticksSurvived, 3, 0);
     gameCanvas.getContext('2d').fillText('Best Score: ' + mostTicksSurvived, 3 ,20)
     
-    if(ticksSurvived = 0){
-        gameCanvas.getContext('2d').fillText('Click to start' + mostTicksSurvived, 200 ,190)
+    
+    // welcome message
+    if(ticksSurvived === 0){
+        gameCanvas.getContext('2d').fillText('Click to start', 200 ,190)
     }
 }
 
