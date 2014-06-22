@@ -8,8 +8,8 @@ var enemyImage = new Image();
 enemyImage.src = 'images/enemy.png';
 
 // player & enemy positions
-var enemyXPositions = [];
-var enemyYPositions = [];
+var enemyXPositions = [250];
+var enemyYPositions = [-60];
 var avatarX = 0;
 var avatarY = 0;
 
@@ -64,11 +64,45 @@ function handleTick (){
     
     updateScore();
     
-    // generate a new enemy
+    
+    
+    
+    
+    
+    
+    // get the values
+    // see if they overlap
+    // if they dont, print the enemyImage
+    // if they do, generate a new one
+    
+    
+    var enemyPos = Math.random() * 500;
+    var enemyGenerated = false;
+    var numberOfEnemys = enemyXPositions.length;
+    
     if (Math.random() < 1/20){
-        enemyYPositions.push(-60);
-        enemyXPositions.push(Math.random() * 500);
-    }
+    
+        for(i = 0; i <= numberOfEnemys; i++){
+        
+            if ( (enemyPos < enemyXPositions[i] -30) || (enemyPos > enemyXPositions[i] +30) ) {
+               
+                    // generate a new enemy
+                    enemyYPositions.push(-60);
+                    enemyXPositions.push(enemyPos);
+                
+            }
+        }
+    }                
+  
+        
+    
+    
+    
+    
+    
+    
+    
+    
     
     // update enemy position and add to canvas
     for(i = 0; i <= enemyXPositions.length; i++){
